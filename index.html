@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth AI Poll — Linda Colasanti, Industry Rockstar</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --body-text: #333333;
+    --slate: #5f8698;
+    --slate-dark: #4a6d7d;
+    --slate-light: #eef3f4;
+    --mint: #7bdcb5;
+    --green: #00d084;
+    --green-dark: #00a869;
+    --card-bg: #f7f7f7;
+    --border: #e2e2e2;
+    --max-width: 640px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--body-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1.55;
+  }
+
+  header.top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 36px 24px 20px;
+    text-align: center;
+  }
+
+  header.top img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  header.top h1 {
+    font-size: 1.7em;
+    line-height: 1.3;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .intro {
+    max-width: var(--max-width);
+    margin: 0 auto 8px;
+    padding: 0 24px 8px;
+    text-align: left;
+    color: var(--body-text);
+    font-size: 0.92em;
+  }
+
+  .intro p {
+    margin: 0 0 14px;
+  }
+
+  .intro .safety-line {
+    color: var(--slate-dark);
+    font-weight: 600;
+  }
+
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 8px 20px 60px;
+  }
+
+  section.question {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 28px 24px;
+    margin-bottom: 22px;
+    border: 1px solid var(--border);
+  }
+
+  section.question .label {
+    display: block;
+    color: var(--slate);
+    font-weight: 700;
+    font-size: 0.95em;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+  }
+
+  section.question h2 {
+    font-size: 1.25em;
+    color: var(--ink);
+    margin: 0 0 8px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  section.question .sub {
+    display: block;
+    color: #666;
+    font-size: 0.88em;
+    margin: 0 0 18px;
+    line-height: 1.4;
+  }
+
+  section.question .scenario {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    font-size: 0.92em;
+    color: var(--body-text);
+  }
+
+  /* Single-choice and multi-select option list (shared look) */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .option-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 16px 18px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: #ffffff;
+    font-size: 1em;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .option-btn:hover {
+    border-color: var(--mint);
+  }
+
+  .option-btn.selected {
+    border-color: var(--green);
+    background: #effbf5;
+    font-weight: 600;
+  }
+
+  .option-btn.disabled-max {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Free-text "other" field nested under an option list */
+  .other-wrap {
+    margin-top: 6px;
+  }
+
+  .other-wrap input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.95em;
+    font-family: inherit;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+  }
+
+  /* Rating grid for topic-interest ranking */
+  .rating-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .rating-row .topic-name {
+    display: block;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    font-size: 1.02em;
+  }
+
+  .scale {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .scale button {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    min-height: 46px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: #ffffff;
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--slate);
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .scale button.selected {
+    background: var(--green);
+    border-color: var(--green-dark);
+    color: #ffffff;
+  }
+
+  .scale-caption {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78em;
+    color: #777;
+    margin-top: 6px;
+  }
+
+  textarea, input[type="email"], input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1em;
+    font-family: inherit;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    resize: vertical;
+  }
+
+  textarea:focus, input:focus, .option-btn:focus, .scale button:focus {
+    outline: 3px solid var(--slate);
+    outline-offset: 1px;
+  }
+
+  .email-wrap {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .email-wrap.visible {
+    display: block;
+  }
+
+  .email-wrap label {
+    display: block;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .checkbox-row input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .checkbox-row label {
+    font-size: 0.92em;
+    color: var(--body-text);
+  }
+
+  .submit-wrap {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  button.submit {
+    background: var(--slate);
+    color: #ffffff;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  button.submit:hover {
+    background: var(--slate-dark);
+  }
+
+  button.submit:disabled {
+    background: #b7b7b7;
+    cursor: not-allowed;
+  }
+
+  .note {
+    text-align: center;
+    color: #777;
+    font-size: 0.85em;
+    margin-top: 14px;
+  }
+
+  #thankyou {
+    display: none;
+    text-align: center;
+    max-width: var(--max-width);
+    margin: 60px auto;
+    padding: 0 24px;
+  }
+
+  #thankyou img {
+    width: 120px;
+    margin-bottom: 20px;
+  }
+
+  #thankyou h2 {
+    color: var(--ink);
+    font-size: 1.5em;
+  }
+
+  #thankyou p {
+    color: var(--body-text);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <img src="logo.svg" alt="Linda Colasanti logo">
+  <h1>Help shape a safe, useful AI experience for young people ages 15 to 25.</h1>
+</header>
+
+<div class="intro">
+  <p>I'm Linda Colasanti, a certified AI consultant and certified NLP practitioner. I've taken on a new role leading Industry Rockstar's youth AI initiative, and I need your help shaping our children's future.</p>
+  <p>We are building a program to help young people ages 15 to 25 use AI safely, ethically, and to their advantage, rather than just consuming it or fearing it.</p>
+  <p>It takes about five minutes to answer, and there are no wrong answers. We do not collect your name or contact information unless you choose to share your email at the end, and your answers are anonymous unless you ask us to follow up with you.</p>
+  <p class="safety-line">Keeping students safe, protecting their data, and teaching responsible AI use are our top priorities.</p>
+</div>
+
+<main>
+  <form id="pollForm">
+
+    <!-- Q1: Age band -->
+    <section class="question" data-qkey="ageBand">
+      <span class="label">Question 1 of 18</span>
+      <h2>How old is the young person you are answering about?</h2>
+      <span class="sub">Choose one. If you are thinking of more than one young person, please pick the one whose birthday comes next.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="15-17">15 to 17</button>
+        <button type="button" class="option-btn" data-value="18-21">18 to 21</button>
+        <button type="button" class="option-btn" data-value="22-25">22 to 25</button>
+        <button type="button" class="option-btn" data-value="Outside this range">Outside this age range</button>
+      </div>
+    </section>
+
+    <!-- Q2: Relationship -->
+    <section class="question" data-qkey="relationship">
+      <span class="label">Question 2 of 18</span>
+      <h2>What is your relationship to this young person?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Parent or guardian">Parent or guardian</button>
+        <button type="button" class="option-btn" data-value="Grandparent">Grandparent</button>
+        <button type="button" class="option-btn" data-value="Other family member">Other family member</button>
+        <button type="button" class="option-btn" data-value="Educator or mentor">Educator or mentor</button>
+        <button type="button" class="option-btn" data-value="Other">Other</button>
+      </div>
+    </section>
+
+    <!-- Q3: Current situation (multi-select) -->
+    <section class="question" data-qkey="situation" data-multi="true" data-max="0">
+      <span class="label">Question 3 of 18</span>
+      <h2>Which of these describes their current situation?</h2>
+      <span class="sub">Select all that apply.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="High school, including homeschool">High school, including homeschool</button>
+        <button type="button" class="option-btn" data-value="College or university">College or university</button>
+        <button type="button" class="option-btn" data-value="Trade school, technical training, or apprenticeship">Trade school, technical training, or apprenticeship</button>
+        <button type="button" class="option-btn" data-value="Working">Working</button>
+        <button type="button" class="option-btn" data-value="Looking for work">Looking for work</button>
+        <button type="button" class="option-btn" data-value="Starting a business or freelancing">Starting a business or freelancing</button>
+        <button type="button" class="option-btn" data-value="Not currently studying or working">Not currently studying or working</button>
+      </div>
+    </section>
+
+    <!-- Q4: AI usage frequency -->
+    <section class="question" data-qkey="aiFrequency">
+      <span class="label">Question 4 of 18</span>
+      <h2>As far as you know, how often does this young person use AI tools such as ChatGPT, Gemini, or tools that create images, music, or video?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Daily or almost daily">Daily or almost daily</button>
+        <button type="button" class="option-btn" data-value="Weekly">Weekly</button>
+        <button type="button" class="option-btn" data-value="Less than weekly">Less than weekly</button>
+        <button type="button" class="option-btn" data-value="Never">Never</button>
+        <button type="button" class="option-btn" data-value="I don't know">I don't know</button>
+      </div>
+    </section>
+
+    <!-- Q5: Respondent's own familiarity -->
+    <section class="question" data-qkey="familiarity">
+      <span class="label">Question 5 of 18</span>
+      <h2>How familiar are you, personally, with AI tools like ChatGPT right now?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Never used it">Never used it</button>
+        <button type="button" class="option-btn" data-value="Heard of it, haven't tried">Heard of it, haven't tried</button>
+        <button type="button" class="option-btn" data-value="Tried it a little">Tried it a little</button>
+        <button type="button" class="option-btn" data-value="Use it regularly">Use it regularly</button>
+      </div>
+    </section>
+
+    <!-- Q6: Open text -->
+    <section class="question" data-qkey="helpWish">
+      <span class="label">Question 6 of 18</span>
+      <h2>What is one thing you wish this young person had more help with right now?</h2>
+      <span class="sub">This does not have to involve AI.</span>
+      <textarea id="helpWishInput" rows="3" placeholder="Optional — type here"></textarea>
+    </section>
+
+    <!-- Q7: Rating grid -->
+    <section class="question" data-qkey="interests">
+      <span class="label">Question 7 of 18</span>
+      <h2>Rate how interested this young person would likely be in each topic.</h2>
+      <div class="rating-list" id="ratingList"></div>
+    </section>
+
+    <!-- Q8: Pay outcomes (multi-select, up to 3) -->
+    <section class="question" data-qkey="payOutcomes" data-multi="true" data-max="3">
+      <span class="label">Question 8 of 18</span>
+      <h2>Which outcomes, if any, would you consider paying for this young person to learn through a program involving AI?</h2>
+      <span class="sub">Choose up to three.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Study more effectively and understand difficult subjects">Study more effectively and understand difficult subjects</button>
+        <button type="button" class="option-btn" data-value="Check information and recognize inaccurate AI answers">Check information and recognize inaccurate AI answers</button>
+        <button type="button" class="option-btn" data-value="Explore careers and practice useful workplace skills">Explore careers and practice useful workplace skills</button>
+        <button type="button" class="option-btn" data-value="Develop a business or freelance idea">Develop a business or freelance idea</button>
+        <button type="button" class="option-btn" data-value="Build an app, website, or game">Build an app, website, or game</button>
+        <button type="button" class="option-btn" data-value="Create art, music, video, or other content">Create art, music, video, or other content</button>
+        <button type="button" class="option-btn" data-value="Practice communication, presentations, or collaboration">Practice communication, presentations, or collaboration</button>
+        <button type="button" class="option-btn" data-value="Use AI with appropriate privacy and academic boundaries">Use AI with appropriate privacy and academic boundaries</button>
+        <button type="button" class="option-btn" data-value="Organize tasks and manage time">Organize tasks and manage time</button>
+        <button type="button" class="option-btn" data-value="None of these would motivate me to pay">None of these would motivate me to pay</button>
+      </div>
+    </section>
+
+    <!-- Q9: Spend history -->
+    <section class="question" data-qkey="spendHistory">
+      <span class="label">Question 9 of 18</span>
+      <h2>During the past twelve months, approximately how much have you personally spent on optional classes, tutoring, camps, coaching, or enrichment for this young person?</h2>
+      <span class="sub">Exclude regular school or college tuition.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="$0">$0</button>
+        <button type="button" class="option-btn" data-value="$1-$100">$1 to $100</button>
+        <button type="button" class="option-btn" data-value="$101-$500">$101 to $500</button>
+        <button type="button" class="option-btn" data-value="$501-$1,000">$501 to $1,000</button>
+        <button type="button" class="option-btn" data-value="More than $1,000">More than $1,000</button>
+        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
+        <button type="button" class="option-btn" data-value="Prefer not to answer">Prefer not to answer</button>
+      </div>
+    </section>
+
+    <!-- Q10: Pay requirements (multi-select, up to 3) -->
+    <section class="question" data-qkey="payRequirements" data-multi="true" data-max="3">
+      <span class="label">Question 10 of 18</span>
+      <h2>What would you need to see before paying for a program like this?</h2>
+      <span class="sub">Choose up to three.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="This young person expresses interest">This young person expresses interest</button>
+        <button type="button" class="option-btn" data-value="Clear examples of what they would learn or create">Clear examples of what they would learn or create</button>
+        <button type="button" class="option-btn" data-value="Relevant instructor experience">Relevant instructor experience</button>
+        <button type="button" class="option-btn" data-value="A sample lesson or demonstration">A sample lesson or demonstration</button>
+        <button type="button" class="option-btn" data-value="A recommendation from someone I trust">A recommendation from someone I trust</button>
+        <button type="button" class="option-btn" data-value="Clear supervision and online safety practices">Clear supervision and online safety practices</button>
+        <button type="button" class="option-btn" data-value="Clear information about data use and any commercial promotions">Clear information about data use and any commercial promotions</button>
+        <button type="button" class="option-btn" data-value="A price that fits our budget">A price that fits our budget</button>
+        <button type="button" class="option-btn" data-value="I would not consider paying">I would not consider paying</button>
+      </div>
+    </section>
+
+    <!-- Q11: Positioning forced-choice -->
+    <section class="question" data-qkey="positioning">
+      <span class="label">Question 11 of 18</span>
+      <h2>Which of these would most appeal to this young person?</h2>
+      <span class="sub">Choose the one that feels closest, even if none is perfect.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Launch something of their own with AI">Launch something of their own with AI</button>
+        <button type="button" class="option-btn" data-value="Get ahead in school or their career">Get ahead in school or their career</button>
+        <button type="button" class="option-btn" data-value="Learn to use AI responsibly and safely">Learn to use AI responsibly and safely</button>
+        <button type="button" class="option-btn" data-value="Feel less anxious about being left behind">Feel less anxious about being left behind</button>
+        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
+      </div>
+    </section>
+
+    <!-- Q12: Workshop concept + likelihood -->
+    <section class="question" data-qkey="workshopLikelihood">
+      <span class="label">Question 12 of 18</span>
+      <h2>Consider this possible first experience.</h2>
+      <div class="scenario">A live, 90-minute online workshop for young people at a similar age and experience level. An instructor guides participants through a practical project in a topic they choose. The workshop includes checking AI outputs for accuracy, time for questions, and a take-home activity guide. No additional paid AI subscription is required.</div>
+      <span class="sub">If the date worked for your family and the total price were $25 per participant, how likely would you be to have this young person attend?</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Definitely would">Definitely would</button>
+        <button type="button" class="option-btn" data-value="Probably would">Probably would</button>
+        <button type="button" class="option-btn" data-value="Might or might not">Might or might not</button>
+        <button type="button" class="option-btn" data-value="Probably would not">Probably would not</button>
+        <button type="button" class="option-btn" data-value="Definitely would not">Definitely would not</button>
+      </div>
+    </section>
+
+    <!-- Q13: Open text - reason -->
+    <section class="question" data-qkey="workshopReason">
+      <span class="label">Question 13 of 18</span>
+      <h2>What is the main reason for your answer?</h2>
+      <textarea id="workshopReasonInput" rows="3" placeholder="Optional — type here"></textarea>
+    </section>
+
+    <!-- Q14: Decision maker -->
+    <section class="question" data-qkey="decisionMaker">
+      <span class="label">Question 14 of 18</span>
+      <h2>Who would decide whether to sign up for this kind of workshop?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="I would decide and pay">I would decide and pay</button>
+        <button type="button" class="option-btn" data-value="This young person and I would decide together, and I would pay">This young person and I would decide together, and I would pay</button>
+        <button type="button" class="option-btn" data-value="This young person and I would share the cost">This young person and I would share the cost</button>
+        <button type="button" class="option-btn" data-value="This young person would decide and pay">This young person would decide and pay</button>
+        <button type="button" class="option-btn" data-value="Another family member would be involved">Another family member would be involved</button>
+        <button type="button" class="option-btn" data-value="We would not consider it">We would not consider it</button>
+      </div>
+    </section>
+
+    <!-- Q15: Obstacles (multi-select, up to 2) -->
+    <section class="question" data-qkey="obstacles" data-multi="true" data-max="2">
+      <span class="label">Question 15 of 18</span>
+      <h2>What would be the biggest obstacles to this young person participating?</h2>
+      <span class="sub">Choose up to two.</span>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="They would not be interested">They would not be interested</button>
+        <button type="button" class="option-btn" data-value="Scheduling or competing commitments">Scheduling or competing commitments</button>
+        <button type="button" class="option-btn" data-value="Cost">Cost</button>
+        <button type="button" class="option-btn" data-value="Too much screen time already">Too much screen time already</button>
+        <button type="button" class="option-btn" data-value="Similar resources are available free">Similar resources are available free</button>
+        <button type="button" class="option-btn" data-value="Uncertainty about the quality or usefulness">Uncertainty about the quality or usefulness</button>
+        <button type="button" class="option-btn" data-value="Privacy or online safety concerns">Privacy or online safety concerns</button>
+        <button type="button" class="option-btn" data-value="Access to a suitable device or reliable internet">Access to a suitable device or reliable internet</button>
+        <button type="button" class="option-btn" data-value="No major obstacles">No major obstacles</button>
+      </div>
+    </section>
+
+    <!-- Q16: Preferred format -->
+    <section class="question" data-qkey="format">
+      <span class="label">Question 16 of 18</span>
+      <h2>Which format would you be most likely to support this young person attending?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="One 60-90 minute live online workshop">One 60 to 90 minute live online workshop</button>
+        <button type="button" class="option-btn" data-value="Two shorter live sessions on separate days">Two shorter live sessions on separate days</button>
+        <button type="button" class="option-btn" data-value="A half-day online event with several speakers and activities">A half-day online event with several speakers and activities</button>
+        <button type="button" class="option-btn" data-value="A weekly live class for four weeks">A weekly live class for four weeks</button>
+        <button type="button" class="option-btn" data-value="Short recorded lessons completed at their own pace">Short recorded lessons completed at their own pace</button>
+        <button type="button" class="option-btn" data-value="An in-person experience">An in-person experience</button>
+        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
+      </div>
+    </section>
+
+    <!-- Q17: Sponsor tolerance -->
+    <section class="question" data-qkey="sponsorTolerance">
+      <span class="label">Question 17 of 18</span>
+      <h2>Would you be comfortable if this program partnered with sponsors to help keep costs lower for families?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Yes">Yes</button>
+        <button type="button" class="option-btn" data-value="Depends on the sponsor">Depends on the sponsor</button>
+        <button type="button" class="option-btn" data-value="No">No</button>
+        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
+      </div>
+    </section>
+
+    <!-- Q18: Open text - anything else -->
+    <section class="question" data-qkey="openText">
+      <span class="label">Question 18 of 18</span>
+      <h2>Is there anything else you would like us to know?</h2>
+      <textarea id="openTextInput" rows="4" placeholder="Optional — type here"></textarea>
+    </section>
+
+    <!-- Pilot interest opt-in -->
+    <section class="question" data-qkey="pilotInterest">
+      <span class="label">One last thing</span>
+      <h2>Would you like to receive details about a pilot once its topic, date, and price are confirmed?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Yes">Yes</button>
+        <button type="button" class="option-btn" data-value="No">No</button>
+      </div>
+      <div class="email-wrap" id="emailWrap">
+        <label for="emailInput">What is the best email to reach you?</label>
+        <input type="email" id="emailInput" placeholder="you@example.com">
+        <div class="checkbox-row">
+          <input type="checkbox" id="marketingOptIn">
+          <label for="marketingOptIn">I would also like to hear about other Industry Rockstar programs and initiatives.</label>
+        </div>
+      </div>
+    </section>
+
+    <div class="submit-wrap">
+      <button type="submit" class="submit" id="submitBtn">Submit My Answers</button>
+      <p class="note">Thank you for helping shape this program.</p>
+    </div>
+
+  </form>
+
+  <div id="thankyou">
+    <img src="logo.svg" alt="Linda Colasanti logo">
+    <h2>Thank you!</h2>
+    <p>Your answers will help us build something genuinely useful for young people. We appreciate your time.</p>
+  </div>
+</main>
+
+<script>
+  // ---- Config ----
+  // Same-domain Pages Function -- no external URL needed.
+  const SUBMIT_ENDPOINT = "/api/submit";
+
+  const TOPICS = [
+    "Using AI responsibly and ethically",
+    "Avoiding AI-generated misinformation",
+    "Building something with AI (an app, business, or project)",
+    "Exploring careers and workplace skills",
+    "Feeling less anxious about AI and the future of jobs",
+    "Protecting privacy and personal data",
+    "Keeping critical thinking skills sharp while using AI",
+    "Cost and access to AI tools"
+  ];
+
+  const responses = {
+    ageBand: null,
+    relationship: null,
+    situation: [],
+    aiFrequency: null,
+    familiarity: null,
+    helpWish: "",
+    interests: {},
+    payOutcomes: [],
+    spendHistory: null,
+    payRequirements: [],
+    positioning: null,
+    workshopLikelihood: null,
+    workshopReason: "",
+    decisionMaker: null,
+    obstacles: [],
+    format: null,
+    sponsorTolerance: null,
+    openText: "",
+    pilotInterest: null,
+    email: "",
+    marketingOptIn: false
+  };
+
+  // Build rating grid
+  const ratingList = document.getElementById("ratingList");
+  TOPICS.forEach((topic) => {
+    const row = document.createElement("div");
+    row.className = "rating-row";
+    row.innerHTML = `
+      <span class="topic-name">${topic}</span>
+      <div class="scale" data-topic="${topic}">
+        ${[1,2,3,4,5].map(n => `<button type="button" data-value="${n}">${n}</button>`).join("")}
+      </div>
+      <div class="scale-caption"><span>Not interested</span><span>Very interested</span></div>
+    `;
+    ratingList.appendChild(row);
+  });
+
+  // Single-choice and multi-select option handling
+  document.querySelectorAll('section.question[data-qkey]').forEach(section => {
+    const qkey = section.dataset.qkey;
+    if (qkey === "interests") return; // handled separately below
+
+    const isMulti = section.dataset.multi === "true";
+    const max = parseInt(section.dataset.max || "0", 10);
+
+    section.querySelectorAll(".option-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (isMulti) {
+          const selectedCount = section.querySelectorAll(".option-btn.selected").length;
+          const isSelected = btn.classList.contains("selected");
+
+          if (!isSelected && max > 0 && selectedCount >= max) {
+            return; // at the cap -- ignore until something is deselected
+          }
+
+          btn.classList.toggle("selected");
+          const arr = responses[qkey];
+          const val = btn.dataset.value;
+          if (btn.classList.contains("selected")) {
+            if (!arr.includes(val)) arr.push(val);
+          } else {
+            const idx = arr.indexOf(val);
+            if (idx > -1) arr.splice(idx, 1);
+          }
+
+          // Grey out remaining unselected options once at the cap
+          if (max > 0) {
+            const nowSelected = section.querySelectorAll(".option-btn.selected").length;
+            section.querySelectorAll(".option-btn").forEach(b => {
+              if (!b.classList.contains("selected")) {
+                b.classList.toggle("disabled-max", nowSelected >= max);
+              }
+            });
+          }
+        } else {
+          section.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+          btn.classList.add("selected");
+          responses[qkey] = btn.dataset.value;
+
+          if (qkey === "pilotInterest") {
+            const emailWrap = document.getElementById("emailWrap");
+            if (btn.dataset.value === "Yes") {
+              emailWrap.classList.add("visible");
+            } else {
+              emailWrap.classList.remove("visible");
+            }
+          }
+        }
+      });
+    });
+  });
+
+  // Rating grid handling
+  ratingList.querySelectorAll(".scale").forEach(scale => {
+    const topic = scale.dataset.topic;
+    scale.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        scale.querySelectorAll("button").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        responses.interests[topic] = parseInt(btn.dataset.value, 10);
+      });
+    });
+  });
+
+  document.getElementById("helpWishInput").addEventListener("input", (e) => {
+    responses.helpWish = e.target.value;
+  });
+
+  document.getElementById("workshopReasonInput").addEventListener("input", (e) => {
+    responses.workshopReason = e.target.value;
+  });
+
+  document.getElementById("openTextInput").addEventListener("input", (e) => {
+    responses.openText = e.target.value;
+  });
+
+  document.getElementById("emailInput").addEventListener("input", (e) => {
+    responses.email = e.target.value;
+  });
+
+  document.getElementById("marketingOptIn").addEventListener("change", (e) => {
+    responses.marketingOptIn = e.target.checked;
+  });
+
+  document.getElementById("pollForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+      await fetch(SUBMIT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...responses, submittedAt: new Date().toISOString() })
+      });
+    } catch (err) {
+      // Fail quietly for the respondent -- still show thank-you.
+      console.error("Submit failed:", err);
+    }
+
+    document.getElementById("pollForm").style.display = "none";
+    document.getElementById("thankyou").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+
+</body>
+</html>
