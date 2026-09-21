@@ -157,20 +157,6 @@
     cursor: not-allowed;
   }
 
-  /* Free-text "other" field nested under an option list */
-  .other-wrap {
-    margin-top: 6px;
-  }
-
-  .other-wrap input[type="text"] {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 0.95em;
-    font-family: inherit;
-    border: 2px solid var(--border);
-    border-radius: 10px;
-  }
-
   /* Rating grid for topic-interest ranking */
   .rating-list {
     display: flex;
@@ -305,6 +291,30 @@
     margin-top: 14px;
   }
 
+  .sources {
+    max-width: var(--max-width);
+    margin: 8px auto 0;
+    padding: 18px 24px 0;
+    border-top: 1px solid var(--border);
+    color: #777;
+    font-size: 0.78em;
+    line-height: 1.5;
+  }
+
+  .sources h3 {
+    color: #999;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 10px;
+    font-weight: 700;
+  }
+
+  .sources ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
   #thankyou {
     display: none;
     text-align: center;
@@ -340,9 +350,10 @@
 </header>
 
 <div class="intro">
-  <p>I'm Linda Colasanti, a certified AI consultant and certified NLP practitioner. I've taken on a new role leading Industry Rockstar's youth AI initiative, and I need your help shaping our children's future.</p>
-  <p>We are building a program to help young people ages 15 to 25 use AI safely, ethically, and to their advantage, rather than just consuming it or fearing it.</p>
-  <p>It takes about five minutes to answer, and there are no wrong answers. We do not collect your name or contact information unless you choose to share your email at the end, and your answers are anonymous unless you ask us to follow up with you.</p>
+  <p>Thank you for your participation.</p>
+  <p>As artificial intelligence rapidly transforms education, careers, and daily life, we are building a dedicated division at Industry Rockstar focused on empowering young people ages 15 to 25 to use AI safely, ethically, and strategically, rather than just consuming it or fearing it.</p>
+  <p>Hi, I am Linda Colasanti, a dyslexia specialist with over 15 years experience working with neurodiverse learners, a certified AI consultant and certified NLP practitioner, and I've taken on the role of leading this division.</p>
+  <p>The questions below are based on current research into how young people are actually using AI right now, not guesswork. We've listed our sources at the end. Your feedback as a parent or advocate is invaluable, and your answers will directly shape how we teach our students so that we directly meet everyone's needs.</p>
   <p class="safety-line">Keeping students safe, protecting their data, and teaching responsible AI use are our top priorities.</p>
 </div>
 
@@ -351,7 +362,7 @@
 
     <!-- Q1: Age band -->
     <section class="question" data-qkey="ageBand">
-      <span class="label">Question 1 of 18</span>
+      <span class="label">Question 1 of 20</span>
       <h2>How old is the young person you are answering about?</h2>
       <span class="sub">Choose one. If you are thinking of more than one young person, please pick the one whose birthday comes next.</span>
       <div class="options">
@@ -364,7 +375,7 @@
 
     <!-- Q2: Relationship -->
     <section class="question" data-qkey="relationship">
-      <span class="label">Question 2 of 18</span>
+      <span class="label">Question 2 of 20</span>
       <h2>What is your relationship to this young person?</h2>
       <div class="options">
         <button type="button" class="option-btn" data-value="Parent or guardian">Parent or guardian</button>
@@ -377,7 +388,7 @@
 
     <!-- Q3: Current situation (multi-select) -->
     <section class="question" data-qkey="situation" data-multi="true" data-max="0">
-      <span class="label">Question 3 of 18</span>
+      <span class="label">Question 3 of 20</span>
       <h2>Which of these describes their current situation?</h2>
       <span class="sub">Select all that apply.</span>
       <div class="options">
@@ -393,7 +404,7 @@
 
     <!-- Q4: AI usage frequency -->
     <section class="question" data-qkey="aiFrequency">
-      <span class="label">Question 4 of 18</span>
+      <span class="label">Question 4 of 20</span>
       <h2>As far as you know, how often does this young person use AI tools such as ChatGPT, Gemini, or tools that create images, music, or video?</h2>
       <div class="options">
         <button type="button" class="option-btn" data-value="Daily or almost daily">Daily or almost daily</button>
@@ -406,7 +417,7 @@
 
     <!-- Q5: Respondent's own familiarity -->
     <section class="question" data-qkey="familiarity">
-      <span class="label">Question 5 of 18</span>
+      <span class="label">Question 5 of 20</span>
       <h2>How familiar are you, personally, with AI tools like ChatGPT right now?</h2>
       <div class="options">
         <button type="button" class="option-btn" data-value="Never used it">Never used it</button>
@@ -418,7 +429,7 @@
 
     <!-- Q6: Open text -->
     <section class="question" data-qkey="helpWish">
-      <span class="label">Question 6 of 18</span>
+      <span class="label">Question 6 of 20</span>
       <h2>What is one thing you wish this young person had more help with right now?</h2>
       <span class="sub">This does not have to involve AI.</span>
       <textarea id="helpWishInput" rows="3" placeholder="Optional — type here"></textarea>
@@ -426,14 +437,49 @@
 
     <!-- Q7: Rating grid -->
     <section class="question" data-qkey="interests">
-      <span class="label">Question 7 of 18</span>
+      <span class="label">Question 7 of 20</span>
       <h2>Rate how interested this young person would likely be in each topic.</h2>
       <div class="rating-list" id="ratingList"></div>
     </section>
 
-    <!-- Q8: Pay outcomes (multi-select, up to 3) -->
+    <!-- Q8: Unsupervised / non-academic use -->
+    <section class="question" data-qkey="unsupervisedUse">
+      <span class="label">Question 8 of 20</span>
+      <h2>Have you noticed this young person using AI for anything beyond schoolwork, such as emotional support, relationship advice, or personal decisions?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Yes">Yes</button>
+        <button type="button" class="option-btn" data-value="No">No</button>
+        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
+      </div>
+    </section>
+
+    <!-- Q9: Career worry -->
+    <section class="question" data-qkey="careerWorry">
+      <span class="label">Question 9 of 20</span>
+      <h2>How worried is this young person about AI's effect on their future job, major, or career path?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Not at all">Not at all</button>
+        <button type="button" class="option-btn" data-value="A little">A little</button>
+        <button type="button" class="option-btn" data-value="Somewhat">Somewhat</button>
+        <button type="button" class="option-btn" data-value="Very">Very</button>
+      </div>
+    </section>
+
+    <!-- Q10: Job-readiness confidence -->
+    <section class="question" data-qkey="jobReadinessConfidence">
+      <span class="label">Question 10 of 20</span>
+      <h2>How confident are you that this young person could use AI well enough to be genuinely job-ready on day one of a new role?</h2>
+      <div class="options">
+        <button type="button" class="option-btn" data-value="Very confident">Very confident</button>
+        <button type="button" class="option-btn" data-value="Somewhat confident">Somewhat confident</button>
+        <button type="button" class="option-btn" data-value="Not very confident">Not very confident</button>
+        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
+      </div>
+    </section>
+
+    <!-- Q11: Pay outcomes (multi-select, up to 3) -->
     <section class="question" data-qkey="payOutcomes" data-multi="true" data-max="3">
-      <span class="label">Question 8 of 18</span>
+      <span class="label">Question 11 of 20</span>
       <h2>Which outcomes, if any, would you consider paying for this young person to learn through a program involving AI?</h2>
       <span class="sub">Choose up to three.</span>
       <div class="options">
@@ -450,9 +496,9 @@
       </div>
     </section>
 
-    <!-- Q9: Spend history -->
+    <!-- Q12: Spend history -->
     <section class="question" data-qkey="spendHistory">
-      <span class="label">Question 9 of 18</span>
+      <span class="label">Question 12 of 20</span>
       <h2>During the past twelve months, approximately how much have you personally spent on optional classes, tutoring, camps, coaching, or enrichment for this young person?</h2>
       <span class="sub">Exclude regular school or college tuition.</span>
       <div class="options">
@@ -466,9 +512,9 @@
       </div>
     </section>
 
-    <!-- Q10: Pay requirements (multi-select, up to 3) -->
+    <!-- Q13: Pay requirements (multi-select, up to 3) -->
     <section class="question" data-qkey="payRequirements" data-multi="true" data-max="3">
-      <span class="label">Question 10 of 18</span>
+      <span class="label">Question 13 of 20</span>
       <h2>What would you need to see before paying for a program like this?</h2>
       <span class="sub">Choose up to three.</span>
       <div class="options">
@@ -484,9 +530,9 @@
       </div>
     </section>
 
-    <!-- Q11: Positioning forced-choice -->
+    <!-- Q14: Positioning forced-choice -->
     <section class="question" data-qkey="positioning">
-      <span class="label">Question 11 of 18</span>
+      <span class="label">Question 14 of 20</span>
       <h2>Which of these would most appeal to this young person?</h2>
       <span class="sub">Choose the one that feels closest, even if none is perfect.</span>
       <div class="options">
@@ -498,32 +544,30 @@
       </div>
     </section>
 
-    <!-- Q12: Workshop concept + likelihood -->
-    <section class="question" data-qkey="workshopLikelihood">
-      <span class="label">Question 12 of 18</span>
-      <h2>Consider this possible first experience.</h2>
-      <div class="scenario">A live, 90-minute online workshop for young people at a similar age and experience level. An instructor guides participants through a practical project in a topic they choose. The workshop includes checking AI outputs for accuracy, time for questions, and a take-home activity guide. No additional paid AI subscription is required.</div>
-      <span class="sub">If the date worked for your family and the total price were $25 per participant, how likely would you be to have this young person attend?</span>
+    <!-- Q15: Open, non-leading format wishes -->
+    <section class="question" data-qkey="formatWishes">
+      <span class="label">Question 15 of 20</span>
+      <h2>If we could design this exactly the way your family would want it, what would make it genuinely exciting for your child, something they'd want to attend rather than something you had to convince them to do?</h2>
+      <span class="sub">Feel free to include how much time or money you would realistically be willing to put into it.</span>
+      <textarea id="formatWishesInput" rows="4" placeholder="Optional — type here"></textarea>
+    </section>
+
+    <!-- Q16: Date availability -->
+    <section class="question" data-qkey="dateAvailability">
+      <span class="label">Question 16 of 20</span>
+      <h2>If we hosted a first event this fall, would a weekday (such as Veterans Day) when school is out work better for your family, or would a weekend day work better?</h2>
       <div class="options">
-        <button type="button" class="option-btn" data-value="Definitely would">Definitely would</button>
-        <button type="button" class="option-btn" data-value="Probably would">Probably would</button>
-        <button type="button" class="option-btn" data-value="Might or might not">Might or might not</button>
-        <button type="button" class="option-btn" data-value="Probably would not">Probably would not</button>
-        <button type="button" class="option-btn" data-value="Definitely would not">Definitely would not</button>
+        <button type="button" class="option-btn" data-value="A weekday, like Veterans Day">A weekday, like Veterans Day</button>
+        <button type="button" class="option-btn" data-value="A weekend day">A weekend day</button>
+        <button type="button" class="option-btn" data-value="Either works">Either works</button>
+        <button type="button" class="option-btn" data-value="Neither works well">Neither works well</button>
       </div>
     </section>
 
-    <!-- Q13: Open text - reason -->
-    <section class="question" data-qkey="workshopReason">
-      <span class="label">Question 13 of 18</span>
-      <h2>What is the main reason for your answer?</h2>
-      <textarea id="workshopReasonInput" rows="3" placeholder="Optional — type here"></textarea>
-    </section>
-
-    <!-- Q14: Decision maker -->
+    <!-- Q17: Decision maker -->
     <section class="question" data-qkey="decisionMaker">
-      <span class="label">Question 14 of 18</span>
-      <h2>Who would decide whether to sign up for this kind of workshop?</h2>
+      <span class="label">Question 17 of 20</span>
+      <h2>Who would decide whether to sign up for something like this?</h2>
       <div class="options">
         <button type="button" class="option-btn" data-value="I would decide and pay">I would decide and pay</button>
         <button type="button" class="option-btn" data-value="This young person and I would decide together, and I would pay">This young person and I would decide together, and I would pay</button>
@@ -534,9 +578,9 @@
       </div>
     </section>
 
-    <!-- Q15: Obstacles (multi-select, up to 2) -->
+    <!-- Q18: Obstacles (multi-select, up to 2) -->
     <section class="question" data-qkey="obstacles" data-multi="true" data-max="2">
-      <span class="label">Question 15 of 18</span>
+      <span class="label">Question 18 of 20</span>
       <h2>What would be the biggest obstacles to this young person participating?</h2>
       <span class="sub">Choose up to two.</span>
       <div class="options">
@@ -552,24 +596,9 @@
       </div>
     </section>
 
-    <!-- Q16: Preferred format -->
-    <section class="question" data-qkey="format">
-      <span class="label">Question 16 of 18</span>
-      <h2>Which format would you be most likely to support this young person attending?</h2>
-      <div class="options">
-        <button type="button" class="option-btn" data-value="One 60-90 minute live online workshop">One 60 to 90 minute live online workshop</button>
-        <button type="button" class="option-btn" data-value="Two shorter live sessions on separate days">Two shorter live sessions on separate days</button>
-        <button type="button" class="option-btn" data-value="A half-day online event with several speakers and activities">A half-day online event with several speakers and activities</button>
-        <button type="button" class="option-btn" data-value="A weekly live class for four weeks">A weekly live class for four weeks</button>
-        <button type="button" class="option-btn" data-value="Short recorded lessons completed at their own pace">Short recorded lessons completed at their own pace</button>
-        <button type="button" class="option-btn" data-value="An in-person experience">An in-person experience</button>
-        <button type="button" class="option-btn" data-value="Not sure">Not sure</button>
-      </div>
-    </section>
-
-    <!-- Q17: Sponsor tolerance -->
+    <!-- Q19: Sponsor tolerance -->
     <section class="question" data-qkey="sponsorTolerance">
-      <span class="label">Question 17 of 18</span>
+      <span class="label">Question 19 of 20</span>
       <h2>Would you be comfortable if this program partnered with sponsors to help keep costs lower for families?</h2>
       <div class="options">
         <button type="button" class="option-btn" data-value="Yes">Yes</button>
@@ -579,9 +608,9 @@
       </div>
     </section>
 
-    <!-- Q18: Open text - anything else -->
+    <!-- Q20: Open text - anything else -->
     <section class="question" data-qkey="openText">
-      <span class="label">Question 18 of 18</span>
+      <span class="label">Question 20 of 20</span>
       <h2>Is there anything else you would like us to know?</h2>
       <textarea id="openTextInput" rows="4" placeholder="Optional — type here"></textarea>
     </section>
@@ -607,6 +636,16 @@
     <div class="submit-wrap">
       <button type="submit" class="submit" id="submitBtn">Submit My Answers</button>
       <p class="note">Thank you for helping shape this program.</p>
+    </div>
+
+    <div class="sources">
+      <h3>Sources</h3>
+      <ul>
+        <li>Pew Research Center, teen and parent surveys on AI use in daily life and education</li>
+        <li>Common Sense Media, 2025 survey on teens' use of AI chatbots and companions</li>
+        <li>American Psychological Association, guidance on adolescents and AI chatbot dependency</li>
+        <li>Digital Education Council, research on student AI use in coursework</li>
+      </ul>
     </div>
 
   </form>
@@ -642,15 +681,17 @@
     familiarity: null,
     helpWish: "",
     interests: {},
+    unsupervisedUse: null,
+    careerWorry: null,
+    jobReadinessConfidence: null,
     payOutcomes: [],
     spendHistory: null,
     payRequirements: [],
     positioning: null,
-    workshopLikelihood: null,
-    workshopReason: "",
+    formatWishes: "",
+    dateAvailability: null,
     decisionMaker: null,
     obstacles: [],
-    format: null,
     sponsorTolerance: null,
     openText: "",
     pilotInterest: null,
@@ -744,8 +785,8 @@
     responses.helpWish = e.target.value;
   });
 
-  document.getElementById("workshopReasonInput").addEventListener("input", (e) => {
-    responses.workshopReason = e.target.value;
+  document.getElementById("formatWishesInput").addEventListener("input", (e) => {
+    responses.formatWishes = e.target.value;
   });
 
   document.getElementById("openTextInput").addEventListener("input", (e) => {
